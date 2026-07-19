@@ -2,6 +2,6 @@
 # DB_URL=jdbc:mysql://localhost:3307/trimlink
 #for production
 DB_URL=jdbc:mysql://localhost:3306/trimlink
-DB_USER=trimlink
-DB_PASSWORD=Trim@123
+DB_USER=username
+DB_PASSWORD=your_password
 DB_DRIVER=com.mysql.cj.jdbc.Driver

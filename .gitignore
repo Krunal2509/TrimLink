@@ -10,3 +10,6 @@
 
 # Maven
 target/
+
+# Properties
+src/main/resources/db.properties
