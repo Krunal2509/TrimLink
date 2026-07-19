@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -22,21 +22,19 @@ jobs:
         - name: Build Project
           run: mvn clean package
 
-        - name: Copy War to Ubuntu
-          uses: appleboy/scp-action@v0.1.7
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
-            source: "target/TrimLink-0.0.1-SNAPSHOT.war"
-            target: "/tmp"
-
         - name: Deploy WAR
-          uses: appleboy/ssh-action@v1.2.0
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
-            script: |
-              sudo cp /tmp/target/TrimLink-0.0.1-SNAPSHOT.war /var/lib/tomcat10/webapps
+          run: |
+              sudo cp target/TrimLink-0.0.1-SNAPSHOT.war /var/lib/tomcat10/webapps
               sudo systemctl restart tomcat10
+
+        - name: Verify Deployment
+          run: |
+              systemctl status tomcat10 --no-pager
+
+        - name: Runner Information
+          run: |
+              whoami
+              pwd
+              hostname
+              java -version
+              mvn -version
