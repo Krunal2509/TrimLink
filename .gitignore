@@ -13,3 +13,6 @@ target/
 
 # Properties
 src/main/resources/db.properties
+
+# Test Action
+.github/workflows/build.yml

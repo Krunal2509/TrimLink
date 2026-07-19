@@ -24,7 +24,7 @@ jobs:
 
         - name: Deploy WAR
           run: |
-              sudo cp target/TrimLink-0.0.1-SNAPSHOT.war /var/lib/tomcat10/webapps
+              sudo cp target/TrimLink-0.0.1-SNAPSHOT.war /var/lib/tomcat10/webapps/trimlink.war
               sudo systemctl restart tomcat10
 
         - name: Verify Deployment
